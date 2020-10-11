@@ -12,7 +12,9 @@ PARENT_ROOT=os.path.abspath(os.path.join(SITE_ROOT, os.pardir))
 GRANDPAPA_ROOT=os.path.abspath(os.path.join(PARENT_ROOT, os.pardir))
 sys.path.insert(0,GRANDPAPA_ROOT)
 from project import create_app
-
+from project import mongo
+from bson.objectid import ObjectId 
+from random import randint
 
 @pytest.fixture
 def test_client():
@@ -29,7 +31,11 @@ class TestSomething:
         WHEN the '/createProfile' page is requested (GET)
         THEN check that the response is valid
         """
+            # Get collections
+        users = mongo.db.profiles2
+        id = int(users.find().skip(users.count_documents({}) - 1)[0]['id'])+1
         data = {
+        "id":id,
         "firstName": "John",
         "lastName": "Doe",
         "position": "Developer",
@@ -56,6 +62,16 @@ class TestSomething:
         WHEN the '/getProfile' page is requested (GET)
         THEN check that the response is valid
         """
-        response = test_client.get('/getProfile', {"_id" : ObjectId("5f833fdcccb862defff89522")})
+                    # Get collections
+        users = mongo.db.profiles2
+        id = int(users.find().skip(users.count_documents({}) - 1)[0]['id'])
+        
+        data = {
+        "id":randint(1,id)
+
+        }
+      
+        response = test_client.get('/getProfile',data=json.dumps(data),headers={'Content-Type': 'application/json'})
+        
         assert response.status_code == 200
         assert response != 'null'
