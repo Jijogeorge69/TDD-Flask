@@ -36,10 +36,10 @@ class TestSomething:
         id = int(users.find().skip(users.count_documents({}) - 1)[0]['id'])+1
         data = {
         "id":id,
-        "firstName": "John",
-        "lastName": "Doe",
+        "firstName": "Jijo",
+        "lastName": "George",
         "position": "Developer",
-        "aboutMe": "Hello World",
+        "aboutMe": "Hello World Test",
         "school": "Drexel",
         "degree": "MA",
         "major": "SE",

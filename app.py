@@ -7,6 +7,8 @@ from flask import Flask
 from project import create_app
 
 app = create_app()
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+app.config['JSON_SORT_KEYS'] = False
 # api = Api(app)
 # api.add_resource(Home, '/')
 # api.add_resource(UserRegistration, '/register')
