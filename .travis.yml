@@ -2,6 +2,12 @@ language: python
 python:     # current default Python on Travis CI
  
   - "3.8"
+  
+addons:
+  sonarcloud:
+    organization: "Jijogeorge69-github" # the key of the org you chose at step #3
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
 
 # command to install dependencies
 install:
