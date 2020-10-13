@@ -16,6 +16,7 @@ install:
 script:
   - pytest --setup-show tests/functional
   - coverage xml
+  - coverage html
 
 after_script:
   - codecov
